@@ -1,9 +1,9 @@
-name: Tests
+name: Build
 
 on:
   workflow_run:
     workflows:
-      - "Lint"
+      - "Tests"
     types:
       - completed
 
@@ -12,14 +12,14 @@ permissions:
   pull-requests: read
 
 jobs:
-  unittests:
+  lint:
     strategy:
       matrix:
         python-version: [ '3.9', '3.10', '3.11' ]
-    name: Unit Tests
+    name: Build
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    uses: SanctumLabs/ci-workflows/.github/workflows/python-test.yml@main
+    uses: SanctumLabs/ci-workflows/.github/workflows/python-build.yml@main
     with:
-      command: make test
+      command: make build
       python-version: ${{ matrix.python-version }}
       packager: poetry

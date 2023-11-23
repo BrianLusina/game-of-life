@@ -1,32 +1,32 @@
 name: Lint
 
-on: [ push ]
+on:
+  - push
+  - pull_request
 
 permissions:
   contents: read
   pull-requests: read
 
 jobs:
-  lint:
-    name: Lint
-    runs-on: ubuntu-latest
+  lint-mypy:
     strategy:
-      max-parallel: 4
       matrix:
-        python-version: [ '3.10' ]
+        python-version: [ '3.11' ]
+    name: mypy Type Checking
+    uses: SanctumLabs/ci-workflows/.github/workflows/python-lint.yml@main
+    with:
+      command: make lint-mypy
+      python-version: ${{ matrix.python-version }}
+      packager: poetry
 
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Install Dependencies
-        run: |
-          pip install poetry
-          poetry install
-
-      - name: Run Linting
-        run: make lint
+  lint-flake8:
+    strategy:
+      matrix:
+        python-version: [ '3.11' ]
+    name: Flake8
+    uses: SanctumLabs/ci-workflows/.github/workflows/python-lint.yml@main
+    with:
+      command: make lint-flake8
+      python-version: ${{ matrix.python-version }}
+      packager: poetry
