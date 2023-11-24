@@ -1,8 +1,11 @@
-from typing import Tuple
+"""
+Life grid is used to evolve the generation to the next and represents this generation in a grid
+"""
+from typing import Tuple, DefaultDict
 from collections import defaultdict
 from .patterns import Pattern
 
-# Characters used to represent alive and dead cells
+# Characters used to represent living and dead cells
 ALIVE = "♥"
 DEAD = "."
 
@@ -19,7 +22,7 @@ class LifeGrid:
         """Initializes a life grid and takes a pattern instance"""
         self.pattern = pattern
 
-    def evolve(self):
+    def evolve(self) -> None:
         """Checks the currently alive cells and their neighbours to determine the next generation of alive cells"""
 
         # Define the delta coordinates for the neighbours of the target cell
@@ -35,7 +38,7 @@ class LifeGrid:
         )
 
         # creates a dictionary for counting the number of living neighbours
-        num_neighbours = defaultdict(int)
+        num_neighbours: DefaultDict[Tuple[int, int], int] = defaultdict(int)
 
         # Loop over the currently alive cells allowing a check for the neighbours of each living cell for the next
         # generation of living cells
@@ -78,7 +81,7 @@ class LifeGrid:
 
         return "\n".join(display)
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Returns a representation of the life grid as a string"""
         return (
             f"{self.pattern.name}: \n Alive Cells -> {sorted(self.pattern.alive_cells)}"

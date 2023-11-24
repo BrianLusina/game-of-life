@@ -49,7 +49,7 @@ lint-flake8: ## lints project using flake8
 
 .PHONY: lint-mypy
 lint-mypy: ## lints project using mypy
-	poetry run mypy .
+	poetry run mypy golife/
 
 .PHONY: lint-pylint
 lint-pylint: ## Runs linting with pylint
