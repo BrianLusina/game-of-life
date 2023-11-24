@@ -1,5 +1,10 @@
+from typing import Tuple
 from collections import defaultdict
 from .patterns import Pattern
+
+# Characters used to represent alive and dead cells
+ALIVE = "♥"
+DEAD = "."
 
 
 class LifeGrid:
@@ -56,13 +61,22 @@ class LifeGrid:
         # updates the living cells with the set that results as the union of cells that stay alive and that come alive.
         self.pattern.alive_cells = stay_alive | come_alive
 
-    def as_string(self, bbox):
+    def as_string(self, bbox: Tuple[int, int, int, int]) -> str:
         """Provides a way to represent the grid as a string that can be displayed in a terminal window.
         Args:
             bbox: Bounding box for the life grid. This box defines which part of the grid to display in the terminal
             window.
         """
-        pass
+        start_col, start_row, end_col, end_row = bbox
+        display = [self.pattern.name.center(2 * (end_col - start_col))]
+        for row in range(start_row, end_row):
+            display_row = [
+                ALIVE if (row, col) in self.pattern.alive_cells else DEAD
+                for col in range(start_col, end_col)
+            ]
+            display.append(" ".join(display_row))
+
+        return "\n".join(display)
 
     def __str__(self):
         """Returns a representation of the life grid as a string"""
