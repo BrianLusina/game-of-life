@@ -8,6 +8,8 @@ from time import sleep
 from .patterns import Pattern
 from .grid import LifeGrid
 
+__all__ = ["CursesView"]
+
 
 # pylint: disable=too-few-public-methods
 class CursesView:
