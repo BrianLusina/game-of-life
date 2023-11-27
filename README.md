@@ -1,5 +1,9 @@
 # Game Of Life (golife)
 
+[![Build](https://github.com/BrianLusina/game-of-life/actions/workflows/build.yml/badge.svg)](https://github.com/BrianLusina/game-of-life/actions/workflows/build.yml)
+[![Lint](https://github.com/BrianLusina/game-of-life/actions/workflows/lint.yml/badge.svg)](https://github.com/BrianLusina/game-of-life/actions/workflows/lint.yml)
+[![Tests](https://github.com/BrianLusina/game-of-life/actions/workflows/tests.yaml/badge.svg)](https://github.com/BrianLusina/game-of-life/actions/workflows/tests.yaml)
+
 Inspired by [John Horton Conway's](https://en.wikipedia.org/wiki/John_Horton_Conway)
 [Game of life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life).
 This is a [cellular automaton](https://en.wikipedia.org/wiki/Cellular_automaton) simulation whose evolution depends on
